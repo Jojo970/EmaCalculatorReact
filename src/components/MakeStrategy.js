@@ -40,7 +40,8 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
     <>
     <div className={pagetheme}>
       <div className='blockThing'> </div>
-    <div className={divtheme}>
+    <form onSubmit={strategyCalculate} className={divtheme}>
+
       <label>Base Asset</label>
       <select className='input' value={name} name = "cryptoName" onChange={(e) => setName(e.target.value)}>
                 {list.map((asset) => {
@@ -51,35 +52,53 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
             </select>
 
       <label>EMA 1 (SHOULD BE THE LESSER VALUE)</label>
-      <input type= 'number' onChange= {(e) => {setEmaOne(e.target.value)}}/>
+      <input type= 'number' onChange= {(e) => {setEmaOne(e.target.value)}} required/>
 
       <label>EMA 2</label>
-      <input type= 'number' onChange= {(e) => {setEmaTwo(e.target.value)}}/>
-      <button onClick={strategyCalculate}>Calculate</button>
-      
-    </div>
+      <input type= 'number' onChange= {(e) => {setEmaTwo(e.target.value)}} required/>
+
+      <button>Calculate</button>
+
+    </form>
     <div className='blockThing'> </div>
-    {animationStyle ? (<><div className='darktheme x1'></div>
+    {animationStyle ? (<>
+    <div className='darktheme x1'></div>
   <div className='darktheme x2'></div>
-  <div className='darktheme x3'></div>
+  <div className='redCandle x3'></div>
   <div className='darktheme x4'></div>
   <div className='darktheme x5'></div>
   <div className='darktheme x6'></div>
-  <div className='darktheme x7'></div>
-  <div className='darktheme x8'></div>
+  <div className='redCandle x7'></div>
+  <div className='redCandle x8'></div>
   <div className='darktheme x9'></div>
+  <div className='redCandle x10'></div>
+  <div className='redCandle x11'></div>
+  <div className='darktheme x13'></div>
+  <div className='darktheme x14'></div>
+  <div className='darktheme x15'></div>
+  <div className='redCandle x16'></div>
+  <div className='darktheme x17'></div>
+  <div className='darktheme x18'></div>
     </>
     ) : (
       <>
     <div className='light x1'></div>
   <div className='light x2'></div>
-  <div className='light x3'></div>
+  <div className='redCandle x3'></div>
   <div className='light x4'></div>
   <div className='light x5'></div>
   <div className='light x6'></div>
-  <div className='light x7'></div>
-  <div className='light x8'></div>
+  <div className='redCandle x7'></div>
+  <div className='redCandle x8'></div>
   <div className='light x9'></div>
+  <div className='redCandle x10'></div>
+  <div className='redCandle x11'></div>
+  <div className='light x13'></div>
+  <div className='light x14'></div>
+  <div className='light x15'></div>
+  <div className='redCandle x16'></div>
+  <div className='light x17'></div>
+  <div className='light x18'></div>
       </>
   )}
     </div>
