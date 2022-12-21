@@ -40,6 +40,7 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
     <>
     <div className={pagetheme}>
       <div className='blockThing'> </div>
+      <p>WARNING! THIS IS A BACKTEST<br></br> RESULTS OF TEST MAY NOT REFLECT REAL TIME TRADING</p>
     <form onSubmit={strategyCalculate} className={divtheme}>
 
       <label>Base Asset</label>
@@ -63,7 +64,7 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
     <p>All data is retrieved from Binance.us API.<br></br>
     Prices are retrieved as daily prices.<br></br>
     Data only reflects past 1 year or amount <br></br>
-    of time that the coin has been on Binance.
+    of time that the coin has been on Binance.<br></br>
     </p>
     <div className='blockThing'> </div>
     {animationStyle ? (<>
