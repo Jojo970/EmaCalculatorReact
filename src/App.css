@@ -91,9 +91,11 @@ img{
 
   .setParamsBackground{
     background-color: rgb(200, 231, 255);
+    text-align: center;
   }
   .setParamsBackgroundDark{
     background-color: #333;
+    text-align: center;
   }
 
 

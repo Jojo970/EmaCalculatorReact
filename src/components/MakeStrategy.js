@@ -60,6 +60,11 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
       <button>Calculate</button>
 
     </form>
+    <p>All data is retrieved from Binance.us API.<br></br>
+    Prices are retrieved as daily prices.<br></br>
+    Data only reflects past 1 year or amount <br></br>
+    of time that the coin has been on Binance.
+    </p>
     <div className='blockThing'> </div>
     {animationStyle ? (<>
     <div className='darktheme x1'></div>
