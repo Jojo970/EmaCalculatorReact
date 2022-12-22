@@ -25,7 +25,7 @@ const HomePage = ({theme}) => {
     <div className={divtheme}>
       <div>
         <NavLink to= "/makestrategy">
-        Ema Calculator
+        EMA Crossover
         </NavLink>
       </div>
     </div>

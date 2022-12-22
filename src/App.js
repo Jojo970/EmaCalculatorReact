@@ -3,8 +3,16 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import HomePage from './components/HomePage';
 import MakeStrategy from './components/MakeStrategy';
 import DisplayResults from './components/DisplayResults';
+import { NavigationBar, NavItem } from './components/NavigationBar';
+
 import {useState} from 'react';
 import howto from "./howto.png";
+import {ReactComponent as MenuLogo} from './menu.svg';
+import {ReactComponent as MoonLogo} from './moon.svg';
+import {ReactComponent as HomeLogo} from './home.svg';
+import {ReactComponent as SunLogo} from './sun.svg';
+import {ReactComponent as QLogo} from './question.svg';
+import {ReactComponent as ProfileLogo} from './profile.svg';
 
 function App() {
   const [emaOne, setEmaOne] = useState(null)
@@ -27,6 +35,14 @@ function App() {
   return(
   <>
   <BrowserRouter>
+  <NavigationBar>
+    <NavItem icon = {<MenuLogo/>}>
+      <NavItem icon = {<HomeLogo/>} />
+      <NavItem icon = {<ProfileLogo/>} />
+      <NavItem icon = {<QLogo/>} />
+
+    </NavItem>
+  </NavigationBar>
     <div id={theme}>
     <div id = "togglebutton" className = {buttonTheme}><img  onClick = {toggleTheme} src= {howto} alt= "darkmodetoggle"/></div>
       <Routes>

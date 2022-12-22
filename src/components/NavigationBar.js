@@ -1,6 +1,19 @@
 import React, {useState} from 'react';
 
-const NavigationBar = () => {
+
+
+export const NavItem = (props) => {
+    return (
+        <li>
+            <a href = "#" className = "icon">
+                {props.icon}
+            </a>
+        </li>
+    )
+}
+
+
+export const NavigationBar = (props) => {
     const [isClicked, setIsClicked] = useState(false)
 
     const toggleBar = () => {
@@ -14,14 +27,10 @@ const NavigationBar = () => {
 
     return(
         <>
-        <nav>
-            <div className='navbarblock'></div>
-            <div className='navbarblock'></div>
-            <div className='navbarblock'></div>
+        <nav className = "headNav">
+            <ul className = "headNav-list"> {props.children} </ul>
         </nav>
         </>
     )
 
 }
-
-export default NavigationBar
