@@ -11,6 +11,15 @@ Pick 2 EMA data lengths and enter them in.
 
 Press Calculate and watch the magic happen!.
 
+## Built With / How it Works
+
+Front End : React.js
+
+Data Calculation : Danfo.js
+
+Back End : (coming soon) Node.js, Express.js, GraphQL
+
+Database : (coming soon) MySQL
 
 ## To Do List
 
