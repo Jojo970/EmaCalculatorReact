@@ -111,7 +111,7 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
   let df = new dfd.DataFrame(data, {columns:['Open Time', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore']})
 
 
-  df.drop({ columns: ['Volume', 'Open Time', 'Quote Asset Volume','High', 'Low',  '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore'], inplace : true});
+  df.drop({ columns: ['Volume', 'Open Time', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore'], inplace : true});
 
   const smaOne = simpleMovingAverage(df['Close'], emaFirst);
   const smaTwo = simpleMovingAverage(df['Close'], emaSecond);

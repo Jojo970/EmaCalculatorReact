@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getData, convertTime, calculateYield} from '../getData';
 import {useNavigate} from 'react-router-dom';
+import Animation from './Animation';
 import * as dfd from "danfojs";
 
 
@@ -11,7 +12,6 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
   const [textTheme, setTextTheme] = useState('text')
   const [plotTheme, setPlotTheme] = useState('plot_div')
   const [pageTheme, setPageTheme] = useState('wholeResultsPage')
-  const [animationStyle, setAnimationStyle] = useState(false)
 
   useEffect(() => {
     if(theme === 'dark') {
@@ -19,12 +19,10 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       setPageTheme('wholeResultsPageDark');
       setPlotTheme('plot_div_dark');
       setTextTheme('text_dark');
-      setAnimationStyle(true)
     } else { setTableTheme('resultsTable');
     setPageTheme('wholeResultsPage');
     setPlotTheme('plot_dive');
-    setTextTheme('text');
-    setAnimationStyle(false)}
+    setTextTheme('text');}
   },[theme])
 
 
@@ -40,7 +38,9 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
     
     getData(emaOne, emaTwo, name).then(res => {
 
-      let df = new dfd.DataFrame(res, {columns:['Open', 'Close', 'Date','EMA_Difference', 'EMA_1', 'EMA_2',"buy_Sell"]})
+      let df = new dfd.DataFrame(res, {columns:['Open','High', 'Low', 'Close', 'Date','EMA_Difference', 'EMA_1', 'EMA_2',"buy_Sell"]})
+
+      console.log(df)
 
       let timeSeries = convertTime(df['Date'])
       
@@ -116,46 +116,7 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
     </div>
           </div>
 
-          {animationStyle ? (<>
-    <div className='darktheme x1'></div>
-  <div className='darktheme x2'></div>
-  <div className='redCandle x3'></div>
-  <div className='darktheme x4'></div>
-  <div className='darktheme x5'></div>
-  <div className='darktheme x6'></div>
-  <div className='redCandle x7'></div>
-  <div className='redCandle x8'></div>
-  <div className='darktheme x9'></div>
-  <div className='redCandle x10'></div>
-  <div className='redCandle x11'></div>
-  <div className='darktheme x13'></div>
-  <div className='darktheme x14'></div>
-  <div className='darktheme x15'></div>
-  <div className='redCandle x16'></div>
-  <div className='darktheme x17'></div>
-  <div className='darktheme x18'></div>
-    </>
-    ) : (
-      <>
-    <div className='light x1'></div>
-  <div className='light x2'></div>
-  <div className='redCandle x3'></div>
-  <div className='light x4'></div>
-  <div className='light x5'></div>
-  <div className='light x6'></div>
-  <div className='redCandle x7'></div>
-  <div className='redCandle x8'></div>
-  <div className='light x9'></div>
-  <div className='redCandle x10'></div>
-  <div className='redCandle x11'></div>
-  <div className='light x13'></div>
-  <div className='light x14'></div>
-  <div className='light x15'></div>
-  <div className='redCandle x16'></div>
-  <div className='light x17'></div>
-  <div className='light x18'></div>
-      </>
-  )}
+          <Animation/>
     </div>
   )
 }

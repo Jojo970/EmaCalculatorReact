@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Animation from './Animation';
 
 const HowTo = () => {
 
@@ -16,6 +17,7 @@ const HowTo = () => {
       <br></br>
       <p>For a more in depth article about the EMA Crossover, click this <a href= 'https://altfins.com/knowledge-base/ema-12-50-crossovers/' target='_blank' rel="noopener noreferrer">link</a>!</p>
       </div>
+      <Animation/>
       </div>
       )
 }

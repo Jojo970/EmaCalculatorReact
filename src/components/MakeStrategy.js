@@ -1,22 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, NavLink} from "react-router-dom";
 import axios from 'axios';
+import Animation from './Animation';
+
 
 const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   const [divtheme, setdivtheme] = useState('setParams');
   const [pagetheme, setpagetheme] = useState('setParamsBackground');
-  const [animationStyle, setAnimationStyle] = useState(false)
 
   useEffect(() => {
     if(theme === 'dark') {
       setdivtheme('setParamsDark');
       setpagetheme('setParamsBackgroundDark')
-      setAnimationStyle(true)
+      
     } else { setdivtheme('setParams')
     setpagetheme('setParamsBackground')
-    setAnimationStyle(false)}
+    }
   },[theme])
 
 
@@ -70,47 +71,9 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
     of time that the coin has been on Binance.<br></br>
     </p>
     <div className='blockThing'> </div>
-    {animationStyle ? (<>
-    <div className='darktheme x1'></div>
-  <div className='darktheme x2'></div>
-  <div className='redCandle x3'></div>
-  <div className='darktheme x4'></div>
-  <div className='darktheme x5'></div>
-  <div className='darktheme x6'></div>
-  <div className='redCandle x7'></div>
-  <div className='redCandle x8'></div>
-  <div className='darktheme x9'></div>
-  <div className='redCandle x10'></div>
-  <div className='redCandle x11'></div>
-  <div className='darktheme x13'></div>
-  <div className='darktheme x14'></div>
-  <div className='darktheme x15'></div>
-  <div className='redCandle x16'></div>
-  <div className='darktheme x17'></div>
-  <div className='darktheme x18'></div>
-    </>
-    ) : (
-      <>
-    <div className='light x1'></div>
-  <div className='light x2'></div>
-  <div className='redCandle x3'></div>
-  <div className='light x4'></div>
-  <div className='light x5'></div>
-  <div className='light x6'></div>
-  <div className='redCandle x7'></div>
-  <div className='redCandle x8'></div>
-  <div className='light x9'></div>
-  <div className='redCandle x10'></div>
-  <div className='redCandle x11'></div>
-  <div className='light x13'></div>
-  <div className='light x14'></div>
-  <div className='light x15'></div>
-  <div className='redCandle x16'></div>
-  <div className='light x17'></div>
-  <div className='light x18'></div>
-      </>
-  )}
+    
     </div>
+    <Animation/>
     </>
   )
 }
