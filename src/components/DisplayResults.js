@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {getData, convertTime, calculateYield} from '../getData';
+import {getData, calculateYield} from '../getData';
 import {useNavigate} from 'react-router-dom';
 import Animation from './Animation';
 import * as dfd from "danfojs";
+import GoogleCandleChart from './GoogleCandleChart';
 
 
 const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
@@ -10,18 +11,16 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
 
   const [tableTheme, setTableTheme] = useState('resultsTable')
   const [textTheme, setTextTheme] = useState('text')
-  const [plotTheme, setPlotTheme] = useState('plot_div')
   const [pageTheme, setPageTheme] = useState('wholeResultsPage')
+  const [chartDataSet, setChartDataSet] = useState()
 
   useEffect(() => {
     if(theme === 'dark') {
       setTableTheme('resultsTableDark');
       setPageTheme('wholeResultsPageDark');
-      setPlotTheme('plot_div_dark');
       setTextTheme('text_dark');
     } else { setTableTheme('resultsTable');
     setPageTheme('wholeResultsPage');
-    setPlotTheme('plot_dive');
     setTextTheme('text');}
   },[theme])
 
@@ -38,38 +37,32 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
     
     getData(emaOne, emaTwo, name).then(res => {
 
-      let df = new dfd.DataFrame(res, {columns:['Open','High', 'Low', 'Close', 'Date','EMA_Difference', 'EMA_1', 'EMA_2',"buy_Sell"]})
+      let df = new dfd.DataFrame(res, {columns:['Date','Open','High', 'Low', 'Close', 'EMA_Difference', 'EMA_1', 'EMA_2', "Date_Converted", "buy_Sell"]})
 
-      console.log(df)
+      const chartData = {
+        'Date': df["Date_Converted"]["$data"],
+        'Open': df["Open"]["$data"],
+        'High': df["High"]["$data"],
+        'Low': df["Low"]["$data"],
+        'Close': df["Close"]["$data"],
+      }
 
-      let timeSeries = convertTime(df['Date'])
-      
-      console.log(timeSeries.length)
-      df.addColumn("newDate", timeSeries, { inplace: true })
-      df.setIndex({column:"newDate", inplace:true})
+      let chartDf = new dfd.DataFrame(chartData)
+
+      const chartMaker = chartDf['$data']
+      setChartDataSet(chartMaker)
+
+
+      df.setIndex({column:"Date_Converted", inplace:true})
 
       let tradedf = df.dropNa()
 
       let percentageYield = calculateYield(tradedf["buy_Sell"], tradedf['Close'])
+
       tradedf.addColumn("Percent Yield", percentageYield, { inplace: true })
 
       setData(tradedf["$data"])
-      const layout = {
-        title: "",
-        xaxis: {
-          title: "",
-        },
-        yaxis: {
-          title: "Value in USD",
-        },
-        width: 1000,
-      };
 
-      const config = {
-        columns: ["Close", "EMA_1", "EMA_2"],
-      };
-
-      df.plot('plot_div').line({ config, layout });
     }
     )
   }, [])
@@ -80,13 +73,8 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       <h1 id = {textTheme}>
         Display Results for {name}/USDT YTD
       </h1>
+      <GoogleCandleChart data = {chartDataSet}/>
     <div>
-      <div id = "containPlot">
-
-        <div id = {plotTheme}>
-          <div id = "plot_div"></div>
-        </div>
-    </div>
         <div className = "containerTable">
           <h3 id = {textTheme}>Trade Details</h3>
           {data ? (

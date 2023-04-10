@@ -26,7 +26,7 @@ const MakeStrategy = ({setEmaOne, setEmaTwo, name, setName, theme}) => {
     .then((res) => {
       let assets = res.data.symbols
       const assetToChoose = assets.filter(asset => asset.quoteAsset === "USDT")
-      console.log(assetToChoose)
+      
       setList(assetToChoose)
     })
   },[])

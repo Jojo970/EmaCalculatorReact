@@ -3,7 +3,7 @@ const dfd = require('danfojs');
 
 
 
-export function convertTime(series) {
+function convertTime(series) {
     let time = [];
 
     const times = series.values
@@ -99,8 +99,6 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
   const emaFirst = (inputEmaOne * 1);
   const emaSecond = (inputEmaTwo * 1);
 
-  console.log(emaFirst, emaSecond)
-
   const limit = (emaSecond * 1) + 365
 
   const res = await fetch(`https://api.binance.us/api/v3/klines?symbol=${name}USDT&interval=1d&limit=${limit}`)
@@ -111,11 +109,13 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
   let df = new dfd.DataFrame(data, {columns:['Open Time', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore']})
 
 
-  df.drop({ columns: ['Volume', 'Open Time', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore'], inplace : true});
+  df.drop({ columns: ['Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore'], inplace : true});
+
+  const timeSeries = await convertTime(df['Open Time'])
 
   const smaOne = simpleMovingAverage(df['Close'], emaFirst);
   const smaTwo = simpleMovingAverage(df['Close'], emaSecond);
-  console.log(smaTwo)
+  
 
   const emaOne = new dfd.Series(estimatedMovingAverage(df['Close'], smaOne, emaFirst));
   const emaTwo = new dfd.Series(estimatedMovingAverage(df['Close'], smaTwo, emaSecond));
@@ -125,8 +125,7 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
   df.addColumn("EMA_Cross", emaDifference, { inplace: true })
   df.addColumn(`EMA_${emaFirst}`, emaOne, { inplace: true })
   df.addColumn(`EMA_${emaSecond}`, emaTwo, { inplace: true })
-
-  // df.print()
+  df.addColumn('Date_Converted', timeSeries, { inplace: true })
 
   df.dropNa({inplace:true})
   df.resetIndex({inplace:true})
@@ -176,6 +175,7 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
     }
 
   }
+
   // console.log(jsonObj)
   // Pass data to the page via props
   return jsonObj
