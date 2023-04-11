@@ -108,6 +108,10 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
 
   let df = new dfd.DataFrame(data, {columns:['Open Time', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore']})
 
+  df = await df.asType('Open', 'float32')
+  df = await df.asType('High', 'float32')
+  df = await df.asType('Low', 'float32')
+  df = await df.asType('Close', 'float32')
 
   df.drop({ columns: ['Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore'], inplace : true});
 

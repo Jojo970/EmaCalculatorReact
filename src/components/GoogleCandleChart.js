@@ -2,10 +2,10 @@ import React from 'react';
 import { Chart } from "react-google-charts";
 
 export const options = {
-    legend: "none",
-  };
+  legend: "none",
+};
 
-const GoogleCandleChart = (data) => {
+const GoogleCandleChart = ({data}) => {
   return (
     <>
     <Chart 
@@ -14,9 +14,7 @@ const GoogleCandleChart = (data) => {
         chartType="CandlestickChart"
         loader={<div>Loading Chart</div>}
         data={data}
-        options={{
-        legend: 'none',
-        }}
+        options={options}
     />
     </>
   )

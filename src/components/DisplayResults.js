@@ -39,6 +39,7 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
 
       let df = new dfd.DataFrame(res, {columns:['Date','Open','High', 'Low', 'Close', 'EMA_Difference', 'EMA_1', 'EMA_2', "Date_Converted", "buy_Sell"]})
 
+
       const chartData = {
         'Date': df["Date_Converted"]["$data"],
         'Open': df["Open"]["$data"],
@@ -50,8 +51,8 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       let chartDf = new dfd.DataFrame(chartData)
 
       const chartMaker = chartDf['$data']
+      chartMaker.unshift( ['day', 'a', 'b', 'c', 'd'],)
       setChartDataSet(chartMaker)
-
 
       df.setIndex({column:"Date_Converted", inplace:true})
 
