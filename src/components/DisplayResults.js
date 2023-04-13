@@ -3,16 +3,16 @@ import {getData, calculateYield} from '../getData';
 import {useNavigate} from 'react-router-dom';
 import Animation from './Animation';
 import * as dfd from "danfojs";
-import GoogleCandleChart from './GoogleCandleChart';
+
 
 
 const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
   const [data, setData] = useState()
-
+  const [numberofTrades, setNumberOfTrades] = useState(0)
   const [tableTheme, setTableTheme] = useState('resultsTable')
   const [textTheme, setTextTheme] = useState('text')
   const [pageTheme, setPageTheme] = useState('wholeResultsPage')
-  const [chartDataSet, setChartDataSet] = useState()
+
 
   useEffect(() => {
     if(theme === 'dark') {
@@ -40,20 +40,6 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       let df = new dfd.DataFrame(res, {columns:['Date','Open','High', 'Low', 'Close', 'EMA_Difference', 'EMA_1', 'EMA_2', "Date_Converted", "buy_Sell"]})
 
 
-      const chartData = {
-        'Date': df["Date_Converted"]["$data"],
-        'Open': df["Open"]["$data"],
-        'High': df["High"]["$data"],
-        'Low': df["Low"]["$data"],
-        'Close': df["Close"]["$data"],
-      }
-
-      let chartDf = new dfd.DataFrame(chartData)
-
-      const chartMaker = chartDf['$data']
-      chartMaker.unshift( ['day', 'a', 'b', 'c', 'd'],)
-      setChartDataSet(chartMaker)
-
       df.setIndex({column:"Date_Converted", inplace:true})
 
       let tradedf = df.dropNa()
@@ -62,11 +48,16 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
 
       tradedf.addColumn("Percent Yield", percentageYield, { inplace: true })
 
+
       setData(tradedf["$data"])
 
     }
     )
   }, [])
+
+  useEffect(() => {
+    setNumberOfTrades(data.length)
+  }, [data])
 
   return (
     <div>
@@ -74,30 +65,37 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       <h1 id = {textTheme}>
         Display Results for {name}/USDT YTD
       </h1>
-      <GoogleCandleChart data = {chartDataSet}/>
     <div>
+      <div>
+        <p># of Trades</p>
+        <p>{numberofTrades}</p>
+      </div>
         <div className = "containerTable">
-          <h3 id = {textTheme}>Trade Details</h3>
           {data ? (
             <table className={tableTheme} >
+              <thead>
             <tr>
               <th>Trade Date</th>
               <th>Price</th>
               <th>Side (Buy/Sell)</th>
               <th>Percent Yield</th>
             </tr>
-            {
+              </thead>
+              <tbody>
+                {
               data.map((d) => {
                 return(
                   <tr>
-                    <td key={d[7]}>{d[7]}</td>
-                    <td key={d[0]}>${d[0]*1}</td>
-                    <td id= {d[6]} key={d[6]}>{d[6]}</td>
-                    <td key={d[8]}>{d[8]}%</td>
+                    <td key={d[8]}>{d[8]}</td>
+                    <td key={d[1]}>${d[1]*1}</td>
+                    <td id= {d[9]} key={d[9]}>{d[9]}</td>
+                    <td key={d[10]}>{d[10]}%</td>
                   </tr>
                 )
               })
             }
+              </tbody>
+            
           </table>
           ) : (<div> </div>) }
         </div>
