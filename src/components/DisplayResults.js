@@ -9,6 +9,7 @@ import * as dfd from "danfojs";
 const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
   const [data, setData] = useState()
   const [numberofTrades, setNumberOfTrades] = useState(0)
+  const [money, setMoney] = useState(10000)
   const [tableTheme, setTableTheme] = useState('resultsTable')
   const [textTheme, setTextTheme] = useState('text')
   const [pageTheme, setPageTheme] = useState('wholeResultsPage')
@@ -50,14 +51,11 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
 
 
       setData(tradedf["$data"])
-
+      setNumberOfTrades(data.length)
     }
     )
-  }, [])
-
-  useEffect(() => {
-    setNumberOfTrades(data.length)
   }, [data])
+
 
   return (
     <div>
@@ -68,6 +66,10 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
     <div>
       <div>
         <p># of Trades</p>
+        <p>{numberofTrades}</p>
+      </div>
+      <div>
+        <p>Profit Calculator</p>
         <p>{numberofTrades}</p>
       </div>
         <div className = "containerTable">
