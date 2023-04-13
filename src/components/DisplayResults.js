@@ -52,6 +52,7 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
 
       setData(tradedf["$data"])
       setNumberOfTrades(data.length)
+      setMoney(data[-1][-1] * money)
     }
     )
   }, [data])
@@ -70,7 +71,7 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       </div>
       <div>
         <p>Profit Calculator</p>
-        <p>{numberofTrades}</p>
+        <p>{money}</p>
       </div>
         <div className = "containerTable">
           {data ? (
