@@ -17,16 +17,9 @@ Front End : React.js
 
 Data Calculation : Danfo.js
 
-Back End : (coming soon) Node.js, Express.js, GraphQL
+## How To Run
 
-Database : (coming soon) MySQL
+Clone this repository.
 
-## To Do List
-
-1. Give dark mode transition a smooth animation.
-
-2. Allow for user registration and allow users to save strategies. 
-
-3. Allow users to control timeframe to test.
-
-4. Currently the graph generated is Danfo.js basic graph. Implementing a more advanced UI would be nice (least priority).
+Run <npm i> in your terminal
+  
