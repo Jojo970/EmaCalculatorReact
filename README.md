@@ -25,15 +25,15 @@ Front End : React.js
 
 Data Calculation : Danfo.js
 
-Data is collected via API calls to a cryptocurrency exchange.
+- Data is collected via API calls to a cryptocurrency exchange.
 
-The API call retrieves data in the form of a JSON message.
+- The API call retrieves data in the form of a JSON message.
 
-The data is sent to a script that turns the incoming JSON message into a Danfo JS dataframe.
+- The data is sent to a script that turns the incoming JSON message into a Danfo JS dataframe.
 
-The script then iterates over the dataframe and finds points in time where trades may have occurred.
+- The script then iterates over the dataframe and finds points in time where trades may have occurred.
 
-Based on those points in time, the script calculates your potential profits.
+- Based on those points in time, the script calculates your potential profits.
 
-That data is sent over to the front end and displayed.
+- That data is sent over to the front end and displayed.
 
