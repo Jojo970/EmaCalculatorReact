@@ -1,39 +1,33 @@
-# EMA Calculator
 
-EMA Calculator is a web app built with React.js for backtesting EMA crossover strategy on cryptocurrencies.
+# EMA CrossOver Calculator
 
-## Try It
+A cryptocurrency backtester application for traders who want to backtest the EMA Crossover strategy on various configurations.
 
-Go to this [link](https://ema-calculator.netlify.app) and click the EMA Crossover link. 
+## Deployment
 
-Pick a cryptocurrecny to test on the scrolldown.
-Pick 2 EMA data lengths and enter them in. 
+To run this project run
 
-Press Calculate and watch the magic happen!.
+```bash
+  git clone https://github.com/Jojo970/EmaCalculatorReact.git
+  cd client
+  npm i
+  npm run start
+```
 
-## Installation
 
-To run this application locally, follow the steps below.
+## Screenshots
 
-1. Clone this repository
-2. Open a terminal and run `npm i`
-3. After all packages are installed, run `npm start`
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-## Built With / How it Works
 
-Front End : React.js
+## Tech Stack
 
-Data Calculation : Danfo.js
+**Client:** React
 
-- Data is collected via API calls to a cryptocurrency exchange.
+**Server:** Node, Express, Danfo.js
 
-- The API call retrieves data in the form of a JSON message.
 
-- The data is sent to a script that turns the incoming JSON message into a Danfo JS dataframe.
+## Authors
 
-- The script then iterates over the dataframe and finds points in time where trades may have occurred.
-
-- Based on those points in time, the script calculates your potential profits.
-
-- That data is sent over to the front end and displayed.
+- [@Jojo970](https://www.github.com/Jojo970)
 
