@@ -4,8 +4,11 @@
 A cryptocurrency backtester application for traders who want to backtest the EMA Crossover strategy on various configurations.
 
 ## Deployment
+To try this project go [here](https://ema-calculator.netlify.app)!
 
-To run this project run
+Or...
+
+To run this project locally, run
 
 ```bash
   git clone https://github.com/Jojo970/EmaCalculatorReact.git
@@ -14,10 +17,6 @@ To run this project run
   npm run start
 ```
 
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 
 ## Tech Stack
