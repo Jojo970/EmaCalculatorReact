@@ -3,16 +3,13 @@ import {getData, calculateYield} from '../getData';
 import {useNavigate} from 'react-router-dom';
 import Animation from './Animation';
 import * as dfd from "danfojs";
-import GoogleCandleChart from './GoogleCandleChart';
 
 
 const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
   const [data, setData] = useState()
-
   const [tableTheme, setTableTheme] = useState('resultsTable')
   const [textTheme, setTextTheme] = useState('text')
   const [pageTheme, setPageTheme] = useState('wholeResultsPage')
-  const [chartDataSet, setChartDataSet] = useState()
 
   useEffect(() => {
     if(theme === 'dark') {
@@ -73,7 +70,6 @@ const DisplayResults = ({emaOne, emaTwo, name, theme}) => {
       <h1 id = {textTheme}>
         Display Results for {name}/USDT YTD
       </h1>
-      <GoogleCandleChart data = {chartDataSet}/>
     <div>
         <div className = "containerTable">
           <h3 id = {textTheme}>Trade Details</h3>

@@ -9,11 +9,11 @@ import HowTo from './components/HowTo';
 // import { NavigationBar, NavItem, NavDrop, DropItem } from './components/NavigationBar';
 
 import {useState} from 'react';
-import {ReactComponent as MenuLogo} from './menu.svg';
-import {ReactComponent as HomeLogo} from './home.svg';
-import {ReactComponent as SunLogo} from './sun.svg';
-import {ReactComponent as QLogo} from './question.svg';
-import {ReactComponent as GithubLogo} from './github.svg';
+import {ReactComponent as MenuLogo} from './images/menu.svg';
+import {ReactComponent as HomeLogo} from './images/home.svg';
+import {ReactComponent as SunLogo} from './images/sun.svg';
+import {ReactComponent as QLogo} from './images/question.svg';
+import {ReactComponent as GithubLogo} from './images/github.svg';
 
 
 

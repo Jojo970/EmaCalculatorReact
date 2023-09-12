@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {ReactComponent as MoonLogo} from '../moon.svg';
-import {ReactComponent as HomeLogo} from '../home.svg';
-import {ReactComponent as SunLogo} from '../sun.svg';
-import {ReactComponent as QLogo} from '../question.svg';
-import {ReactComponent as ProfileLogo} from '../profile.svg';
+import {ReactComponent as MoonLogo} from '../images/moon.svg';
+import {ReactComponent as HomeLogo} from '../images/home.svg';
+import {ReactComponent as SunLogo} from '../images/sun.svg';
+import {ReactComponent as QLogo} from '../images/question.svg';
+import {ReactComponent as ProfileLogo} from '../images/profile.svg';
 
 
 const DropItem = (props) => {
