@@ -108,7 +108,6 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
 
   let df = new dfd.DataFrame(data, {columns:['Open Time', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore']})
 
-
   df.drop({ columns: ['Volume', 'CloseTime', 'Quote Asset Volume', '# Of Trades', 'Buy Base Volume', 'Buy Quote Volume', 'ignore'], inplace : true});
 
   const timeSeries = await convertTime(df['Open Time'])
@@ -131,14 +130,15 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
   df.resetIndex({inplace:true})
 
   const dfLength = df.shape[0]
-  let jsonObj = []
+  const jsonObj = []
   let num = 0
+  let trade = 0
   let inTrade = false;
   let firstCrossOver = false
 
 
   while ( num < dfLength) {
-    let checker = df.iloc({rows: [num]})['$data'][0][3]
+    let checker = df.iloc({rows: [num]})['$data'][0][5]
     let objToAppend = df.iloc({rows: [num]})['$data'][0]
     
     if(firstCrossOver){
@@ -148,6 +148,7 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
           jsonObj.push(objToAppend);
           inTrade = true
           num++
+          trade ++
         } else { objToAppend.push(NaN);
                 jsonObj.push(objToAppend);
                 num++}
@@ -157,6 +158,7 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
           jsonObj.push(objToAppend);
           inTrade = false
           num++
+          trade ++
         } else  { objToAppend.push(NaN);
                 jsonObj.push(objToAppend); 
                 num++}
@@ -173,8 +175,9 @@ export async function getData(inputEmaOne, inputEmaTwo, name) {
         firstCrossOver = true
       }
     }
-
   }
+
+  
 
   // console.log(jsonObj)
   // Pass data to the page via props
